@@ -163,11 +163,13 @@ public class Model
     }
 ```
 ## Функция рендера модели
-### Тут мы задаем масштаб 
+### Тут мы задаем трансформацию нашей модельки: 
+ а потом трансформируем каждую вершину нашей модельки.
 ```c#
     private void Form1_Paint(object sender, PaintEventArgs e)
         {
             label1.Text = scale.ToString();
+         
             p.Scale(-10f, -10f, -10f);
             p.Position(0.0f, 44, 0.0f);
             p.Rotate(0.0f, -(float)Math.Sin(scale / 100) * 200, 0.0f);
