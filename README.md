@@ -209,6 +209,6 @@ public class Model
         }
 ```
 # Результат
-![result](https://github.com/galeevlxix/game_engine_test/blob/master/plane_pic.jpg?raw=true)
+![result](https://github.com/galeevlxix/game_engine_test/blob/master/plane_pic.png?raw=true)
 
 
