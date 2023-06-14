@@ -162,4 +162,49 @@ public class Model
         }
     }
 ```
-## 
+## Функция рендера модели
+### Тут мы задаем масштаб 
+```c#
+    private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            label1.Text = scale.ToString();
+            p.Scale(-10f, -10f, -10f);
+            p.Position(0.0f, 44, 0.0f);
+            p.Rotate(0.0f, -(float)Math.Sin(scale / 100) * 200, 0.0f);
+            p.PerspectiveProj(100.0f, 1000, 1000, 1.0f, 1000.0f);
+
+            //умножаем вектора на матрицу
+            //var vertexes = model.Vertexes.Select(v => Vector3.Transform(v, p.getTransformation())).ToList();
+
+            List<vec3> vertexes = new List<vec3>();
+
+            foreach (var vertex in model.Vertexes)
+            {
+                vertexes.Add(Transform(vertex, p.getTransformation()));
+            }
+
+            e.Graphics.TranslateTransform(this.Width / 2, this.Height / 2);
+
+            //создаем graphicsPath
+            using (var path = new GraphicsPath())
+            {
+                //создаем грани
+                var prev = vec3.Zero;
+                var prevF = 0;
+                foreach (var f in model.Fig)
+                {
+                    if (f == 0) path.CloseFigure();
+                    var v = vertexes[f];
+                    if (prevF != 0 && f != 0)
+                        path.AddLine(prev.x, prev.y, v.x, v.y);
+                    prev = v;
+                    prevF = f;
+                }
+
+                //отрисовываем
+                e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                e.Graphics.DrawPath(Pens.White, path);
+            }
+        }
+```
+
