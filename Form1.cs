@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace game_engine
 {
     public partial class Form1 : Form
-    {
+    { 
         bool md = false;
         static float scale = 100;
         Label label1 = new Label();
@@ -62,6 +62,7 @@ namespace game_engine
             Invalidate();
         }
 
+        //отрисовка
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             label1.Text = scale.ToString();
